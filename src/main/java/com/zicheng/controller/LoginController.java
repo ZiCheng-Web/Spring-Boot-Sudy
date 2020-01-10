@@ -3,6 +3,7 @@ package com.zicheng.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class LoginController {
-
+    //登陆
     @RequestMapping("/user/login")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
@@ -33,5 +34,12 @@ public class LoginController {
             model.addAttribute("msg", "用户名或者密码错误");
             return "index";
         }
+    }
+    //注销退出
+    @RequestMapping("/user/logout")
+    public String logOut(HttpSession session){
+        //清除session
+        session.invalidate();
+        return "redirect:/index";
     }
 }
